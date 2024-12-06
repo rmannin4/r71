@@ -10,7 +10,7 @@ const LoginPage = ({ setToken }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${API_BASE_URL}/api/login`, { username, password });
+            const response = await axios.post(`http://165.22.7.42/api/login`, { username, password });
             setToken(response.data.token);
             localStorage.setItem('token', response.data.token);
             console.log(localStorage.getItem('token')); // Debugging to ensure token is saved

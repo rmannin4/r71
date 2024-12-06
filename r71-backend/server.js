@@ -86,4 +86,4 @@ app.get('/reports-data', verifyToken, async (req, res) => {
 });
 
 // Start server
-app.listen(PORT, () => console.log(`Backend running on port ${PORT}`));
+app.listen(PORT, '0.0.0.0', () => console.log(`Backend running on port ${PORT}`));
