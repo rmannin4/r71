@@ -1,0 +1,23 @@
+# Node.js
+node_modules/  # Exclude dependencies
+npm-debug.log  # Exclude debug logs
+.env           # Exclude sensitive environment variables
+
+# Build files
+/build/
+
+# OS-specific files
+.DS_Store      # macOS file
+Thumbs.db      # Windows file
+
+# Logs
+*.log
+logs/
+
+# IDE-specific files
+.vscode/
+.idea/
+*.iml
+
+# Git-specific files
+.git/
