@@ -27,7 +27,7 @@ const db = mysql.createPool({
 const userCredentials = { username: 'Ryan', password: 'Ryan' };
 
 // Login route
-app.post('/login', (req, res) => {
+app.post('/api/login', (req, res) => {
     const { username, password } = req.body;
 
     if (username === userCredentials.username && password === userCredentials.password) {
@@ -41,7 +41,8 @@ app.post('/login', (req, res) => {
 
 // Middleware to verify JWT
 const verifyToken = (req, res, next) => {
-    const token = req.headers['authorization'];
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
 
     if (!token) {
         return res.status(403).json({ message: 'Token required' });
@@ -51,7 +52,7 @@ const verifyToken = (req, res, next) => {
         if (err) {
             return res.status(401).json({ message: 'Invalid token' });
         }
-        req.user = decoded; // Attach the decoded token to the request
+        req.user = decoded;
         next();
     });
 };

@@ -21,8 +21,8 @@ const Reports = () => {
         const fetchData = async () => {
             const token = localStorage.getItem('token');
             try {
-                const response = await axios.get('http://localhost:3000/reports-data', {
-                    headers: { Authorization: token },
+                const response = await axios.get('/api/reports-data', {
+                    headers: { Authorization: `Bearer ${token}` },
                 });
                 setChartData(response.data);
             } catch (error) {

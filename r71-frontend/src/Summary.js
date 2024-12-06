@@ -10,11 +10,24 @@ import {
     Title,
     Tooltip,
     Legend,
+    BarController,
+    LineController,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 
-// Register components explicitly
-ChartJS.register(CategoryScale, LinearScale, BarElement, LineElement, PointElement, Title, Tooltip, Legend);
+// Register required Chart.js components
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    LineElement,
+    PointElement,
+    Title,
+    Tooltip,
+    Legend,
+    BarController,
+    LineController
+);
 
 const Summary = () => {
     const [chartData, setChartData] = useState(null);
@@ -23,7 +36,7 @@ const Summary = () => {
         const fetchData = async () => {
             const token = localStorage.getItem('token');
             try {
-                const response = await axios.get('http://localhost:3000/summary-data', {
+                const response = await axios.get('/api/summary-data', {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setChartData(response.data);

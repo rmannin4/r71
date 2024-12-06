@@ -8,8 +8,7 @@ const LoginPage = ({ setToken }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:3000/login', { username, password });
-            setToken(response.data.token);
+            const response = await axios.post('/api/login', { username, password });
             localStorage.setItem('token', response.data.token);
         } catch (error) {
             alert('Invalid credentials');
