@@ -22,8 +22,8 @@ app.use(cors({
 
 // MySQL Database connection
 const db = mysql.createPool({
-    host: process.env.DB_HOST || 'localhost',
-    user: process.env.DB_USER || 'root',
+    host: process.env.DB_HOST || 'sql3.freemysqlhosting.net',
+    user: process.env.DB_USER || 'sql3750168',
     password: process.env.DB_PASSWORD || 'rZ2fhr8Dms',
     database: process.env.DB_NAME || 'sql3750168',
 });
@@ -64,18 +64,20 @@ const verifyToken = (req, res, next) => {
 };
 
 // Endpoint for Summary chart data (Clean Tech Venture Capital and Interest Rates)
-app.get('/summary-data', verifyToken, async (req, res) => {
+app.get('/api/summary-data', verifyToken, async (req, res) => {
     try {
+        console.log('Attempting database query...');
         const [rows] = await db.query('SELECT * FROM summary_data');
+        console.log('Query result:', rows);
         res.json(rows);
     } catch (error) {
-        console.error('Error fetching summary data:', error);
-        res.status(500).json({ message: 'Internal server error' });
+        console.error('Database error details:', error);
+        res.status(500).json({ message: 'Internal server error', error: error.message });
     }
 });
 
 // Endpoint for Reports chart data (Geothermal Potential vs. Installed Capacity)
-app.get('/reports-data', verifyToken, async (req, res) => {
+app.get('/api/reports-data', verifyToken, async (req, res) => {
     try {
         const [rows] = await db.query('SELECT * FROM reports_data');
         res.json(rows);

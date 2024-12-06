@@ -63,13 +63,13 @@ const Summary = () => {
             {
                 type: 'bar',
                 label: 'Venture Capital (Billion $)',
-                data: chartData.map((item) => item.ventureCapital),
-                backgroundColor: 'rgba(54, 162, 235, 0.6)', // Bar color
+                data: chartData.map((item) => item.venture_capital),  // Bar color
+                backgroundColor: 'rgba(54, 162, 235, 0.6)',
             },
             {
                 type: 'line',
                 label: 'Federal Reserve Interest Rate (%)',
-                data: chartData.map((item) => item.interestRate), // Line chart data
+                data: chartData.map((item) => item.interest_rate), //Line chart data
                 borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 2,
                 tension: 0.4, // Smooth line
