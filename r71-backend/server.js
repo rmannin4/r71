@@ -24,8 +24,8 @@ app.use(cors({
 const db = mysql.createPool({
     host: process.env.DB_HOST || 'localhost',
     user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASSWORD || '',
-    database: process.env.DB_NAME || 'clean_energy',
+    password: process.env.DB_PASSWORD || 'rZ2fhr8Dms',
+    database: process.env.DB_NAME || 'sql3750168',
 });
 
 // Hardcoded credentials
