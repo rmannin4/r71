@@ -13,7 +13,7 @@ import {
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 
-// Register components
+// Register components explicitly
 ChartJS.register(CategoryScale, LinearScale, BarElement, LineElement, PointElement, Title, Tooltip, Legend);
 
 const Summary = () => {
@@ -24,7 +24,7 @@ const Summary = () => {
             const token = localStorage.getItem('token');
             try {
                 const response = await axios.get('http://localhost:3000/summary-data', {
-                    headers: { Authorization: token },
+                    headers: { Authorization: `Bearer ${token}` },
                 });
                 setChartData(response.data);
             } catch (error) {
@@ -34,8 +34,15 @@ const Summary = () => {
         fetchData();
     }, []);
 
-    if (!chartData) return <p className="text-center mt-4">Loading...</p>;
+    if (!chartData) {
+        return (
+            <div className="container mt-5 text-center">
+                <p>Loading chart data...</p>
+            </div>
+        );
+    }
 
+    // Prepare data for the chart
     const data = {
         labels: chartData.map((item) => item.year), // X-axis labels
         datasets: [
@@ -56,18 +63,30 @@ const Summary = () => {
         ],
     };
 
+    // Chart options
     const options = {
         responsive: true,
         plugins: {
-            legend: { position: 'top' },
-            title: { display: true, text: 'Clean Tech Venture Capital and Interest Rates' },
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Clean Tech Venture Capital and Interest Rates',
+            },
         },
         scales: {
             y: {
-                title: { display: true, text: 'Investment Flows (Billion $) / Interest Rate (%)' },
+                title: {
+                    display: true,
+                    text: 'Investment Flows (Billion $) / Interest Rate (%)',
+                },
             },
             x: {
-                title: { display: true, text: 'Years' },
+                title: {
+                    display: true,
+                    text: 'Years',
+                },
             },
         },
     };
