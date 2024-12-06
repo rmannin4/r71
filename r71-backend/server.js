@@ -14,7 +14,7 @@ const SECRET_KEY = 'your_jwt_secret';
 // Middleware
 app.use(bodyParser.json());
 app.use(cors({
-    origin: 'http://165.22.7.42>',
+    origin: 'http://165.22.7.42',
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type', 'Authorization'],
 }));
