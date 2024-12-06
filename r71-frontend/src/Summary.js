@@ -35,6 +35,7 @@ const Summary = () => {
     useEffect(() => {
         const fetchData = async () => {
             const token = localStorage.getItem('token');
+            console.log('Token sent in headers:', token); // Debugging
             try {
                 const response = await axios.get('/api/summary-data', {
                     headers: { Authorization: `Bearer ${token}` },

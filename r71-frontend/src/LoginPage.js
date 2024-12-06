@@ -5,15 +5,20 @@ const LoginPage = ({ setToken }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://165.22.7.42:3000';
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/api/login', { username, password });
+            const response = await axios.post(`${API_BASE_URL}/api/login`, { username, password });
+            setToken(response.data.token);
             localStorage.setItem('token', response.data.token);
+            console.log(localStorage.getItem('token')); // Debugging to ensure token is saved
         } catch (error) {
+            console.error('Login failed:', error.response || error.message);
             alert('Invalid credentials');
         }
-    };
+    };    
 
     return (
         <div className="container mt-5">

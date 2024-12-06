@@ -13,7 +13,12 @@ const SECRET_KEY = 'your_jwt_secret';
 
 // Middleware
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({
+    origin: 'http://165.22.7.42>',
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+}));
+
 
 // MySQL Database connection
 const db = mysql.createPool({
@@ -29,6 +34,7 @@ const userCredentials = { username: 'Ryan', password: 'Ryan' };
 // Login route
 app.post('/api/login', (req, res) => {
     const { username, password } = req.body;
+    console.log(`Received: Username=${username}, Password=${password}`);
 
     if (username === userCredentials.username && password === userCredentials.password) {
         // Generate a JWT
